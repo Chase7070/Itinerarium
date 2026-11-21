@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      # Backend environment variables
+      NODE_ENV: production
+      MONGODB_CONNECTION_STRING: mongodb://mongo:27017/journey_pin
+      JWT_SECRET: your_jwt_secret
+      PORT: 3001
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      # Frontend environment variables
+      NODE_ENV: production
+      NEXT_PUBLIC_WS_BASE_URL: ws://localhost:3001
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+      NEXT_PUBLIC_ORS_API_KEY: your_ors_api_key
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:8.0
+    container_name: mongodb

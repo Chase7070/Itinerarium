@@ -1,0 +1,372 @@
+/* @import url('https://fonts.googleapis.com/css?family=Pirata+One|Bilbo+Swash+Caps&display=swap'); */
+@import "tailwindcss";
+@variant dark (&); 
+
+@font-face {
+  /* font-family: Morris;
+  src: url(https://cdn.statically.io/gh/EmmesCodes/Tipografias/dae9f5bb/MorrisInitials.ttf); */
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+
+.background {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.contain {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  margin: 0 auto;
+  padding: 4em;
+}
+
+.inkTitle {
+  font-size: 3em;
+  font-family: 'Pirata One', sans-serif;
+  text-align: center;
+  line-height: 3em;
+  color: DimGray;
+}
+
+.labarum {
+  width: 40%;
+  height: auto;
+}
+
+.parchment {
+  position: relative;
+  margin: 0em 0;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.parchmentBackground {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/parchment.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* ✅ apply filter effect */
+  filter: url(#wavy2);
+
+  /* ✅ simulate edge breaking effect (irregular gradient mask) */
+  mask-image: radial-gradient(ellipse 115% 100% at 50% 50%, black 85%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 115% 100% at 60% 50%, rgb(70, 15, 15) 85%, transparent 100%);
+  
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+.parchmentBorder {
+  position: absolute;
+  inset: 0;
+  border: 20px solid transparent;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.4), 0 0 125px #8f5922 inset;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.parchmentContent {
+  position: relative;
+  z-index: 2;
+  padding: 2em;
+  background-color: transparent;
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 3;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.contentContainer p {
+  font-size: 2.25em;
+  color: #7F3300;
+  margin-top: 0.75em;
+  text-align: justify;
+}
+
+.signature {
+  text-align: right;
+  color: black;
+  font-size: 2.5em;
+}
+
+.cachet {
+  width: calc((100vw * 5) / 42);
+  height: auto;
+  margin-top: 4rem;
+  margin-left: auto;
+}
+
+.cachet img,
+.labarum img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+.authButtons {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 2;
+
+  animation: fadeInButtons 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInButtons {
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+
+
+/* the map control sidebar */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #d4c3a3;
+  border-radius: 999px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  background: url('/assets/knob.png') no-repeat center center;
+  background-size: cover;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 32px;
+  height: 32px;
+  background: url('/assets/knob.png') no-repeat center center;
+  background-size: cover;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Main popup container (holds content and tip) */
+.leaflet-popup {
+  /* Ensures no external 'white border' if this element had one from other global styles */
+}
+
+/* Popup content wrapper - this is the element that usually has the white background and padding */
+.leaflet-popup-content-wrapper {
+  background: transparent !important; /* Make it completely transparent */
+  color: inherit !important; /* Inherit text color from your custom content */
+  padding: 0 !important; /* Remove all default padding; your component handles its own */
+  box-shadow: none !important; /* Remove default Leaflet shadow; your component has its own */
+  border-radius: 0 !important; /* Remove default border-radius; your component has its own */
+  /* If your custom popup has rounded corners (e.g., rounded-xl), this prevents a non-rounded
+     transparent box from visually "cutting off" your custom shadow. */
+}
+
+/* The actual content div inside the wrapper */
+.leaflet-popup-content {
+  margin: 0 !important; /* Remove any default margin */
+  width: auto !important; /* Let your content define the width */
+  /* Note: If your custom popup content (e.g., PopupContent.tsx) does not have a
+     background color itself, this area would be transparent. Ensure your custom
+     React component has its own background (e.g., bg-slate-900). */
+}
+
+/* --- Styling the Popup Tip (Arrow) to match a Slate Background --- */
+
+/* Container for the tip */
+.leaflet-popup-tip-container {
+  width: 40px; /* Default is 40px, can be adjusted */
+  height: 20px; /* Default is 20px, can be adjusted */
+  /* Remove if it interferes or if your custom popup is offset:
+  margin: 0 auto;
+  */
+  overflow: hidden; /* Important for shaping the tip if using pseudo-elements */
+}
+
+/* The tip itself */
+.leaflet-popup-tip {
+  background: #1e293b !important; /* SLATE-800 - Change this to match your EXACT custom popup background (e.g., bg-slate-900 -> #0f172a) */
+  /* If your custom popup is bg-slate-900, use #0f172a */
+  /* If your custom popup is bg-slate-800, use #1e293b */
+
+  color: #1e293b !important; /* Same as background for border effect */
+  box-shadow: none !important; /* Remove any default shadow on the tip itself */
+  border: none !important; /* Remove default borders if any were used to create the triangle */
+
+  /* The following creates a triangle using the ::before pseudo-element,
+     which is a common way to style custom tips if the default border-based
+     tip is hard to override directly to a solid color.
+     Alternatively, Leaflet's default tip uses borders.
+     Let's try to style Leaflet's existing tip structure first.
+     Leaflet's tip is usually a <div> with pseudo-elements or clever bordering.
+     The default leaflet-popup-tip is a 0x0 div with large borders.
+     We are giving it a background and trying to make it solid.
+     If the default tip is hard to make solid color with just background,
+     you might need to hide it and create your own with :after/:before on content-wrapper,
+     or inspect its exact border structure.
+
+     For many Leaflet versions, the tip is made of borders.
+     Let's assume your custom popup background is bg-slate-800 (#1e293b) for this example.
+  */
+
+  /* Resetting default tip styles that rely on transparent borders */
+  border-left: 10px solid transparent !important;
+  border-right: 10px solid transparent !important;
+  border-top: 10px solid #1e293b !important; /* SLATE-800 (or your chosen slate color) */
+  /* For a tip pointing down (if anchor is 'bottom'): */
+  /* border-bottom: 10px solid #1e293b !important; */
+  /* border-top: none !important; */
+
+  /* Ensure it's small and positioned correctly (Leaflet usually handles this) */
+  padding: 0 !important;
+  margin: 0 auto; /* Center the tip */
+  width: 0 !important; /* If using border method for triangle */
+  height: 0 !important; /* If using border method for triangle */
+}
+
+/* Adjustments for different tip positions (Leaflet adds classes like .leaflet-popup-anchor-bottom) */
+/* Example for a popup anchored above the point (tip pointing down) */
+.leaflet-popup-anchor-top .leaflet-popup-tip {
+  border-top: 10px solid #1e293b !important; /* Tip color - SLATE-800 example */
+  border-bottom: none !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+/* Example for a popup anchored below the point (tip pointing up) */
+.leaflet-popup-anchor-bottom .leaflet-popup-tip {
+  border-bottom: 10px solid #1e293b !important; /* Tip color - SLATE-800 example */
+  border-top: none !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+/* You may need to add similar overrides for .leaflet-popup-anchor-left and .leaflet-popup-anchor-right if you use them */
+/* For example: */
+.leaflet-popup-anchor-left .leaflet-popup-tip {
+  border-left: 10px solid #1e293b !important; /* Tip color - SLATE-800 example */
+  border-right: none !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  margin-top: -10px; /* Adjust vertical centering */
+}
+
+.leaflet-popup-anchor-right .leaflet-popup-tip {
+  border-right: 10px solid #1e293b !important; /* Tip color - SLATE-800 example */
+  border-left: none !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+  margin-top: -10px; /* Adjust vertical centering */
+}
+
+
+/* Override the popup close button */
+.leaflet-popup-close-button {
+  /* Resetting potentially inherited animations or transitions */
+  transition: none !important; /* Remove any CSS transitions */
+  animation: none !important; /* Remove any CSS keyframe animations */
+  transform: none !important; /* Reset any transforms that might be part of an animation */
+
+  /* Basic styling for a clean look */
+  position: absolute;
+  top: 0; /* Adjust as needed, e.g., 5px or 8px */
+  right: 0; /* Adjust as needed, e.g., 5px or 8px */
+  width: 30px; /* Or your preferred size */
+  height: 30px; /* Or your preferred size */
+  padding: 4px; /* Inner padding for the 'x' character if using text */
+
+  /* Appearance for dark theme */
+  background-color: transparent !important; /* No background for the button itself initially */
+  color: #94a3b8 !important; /* slate-400 for the 'x' icon/text */
+  font-size: 24px !important; /* Size of the '×' character */
+  font-weight: bold;
+  line-height: 1; /* Ensure '×' is centered */
+  text-align: center;
+  text-decoration: none !important;
+  border: none !important;
+  border-radius: 4px; /* Optional: slight rounding for the button's hover state */
+  cursor: pointer;
+  outline: none !important; /* Remove focus outline if not desired */
+}
+
+.leaflet-popup-close-button:hover {
+  color: #e2e8f0 !important; /* slate-200 for hover - brighter white */
+  background-color: rgba(71, 85, 105, 0.3) !important; /* slate-700 with some opacity for hover background */
+}
+
+/* If the '×' character itself is an SVG or an image in Leaflet's default,
+  you might need to hide the default and use a ::before or ::after pseudo-element
+  to create your own '×', or use a background image.
+
+  However, Leaflet's default is usually a text '×'.
+  The 'text-align: center' and 'line-height: 1' on the button itself should help center it.
+  Adjust `font-size` for the '×' and `width`/`height`/`padding` for the button area.
+*/
+
+/* Ensure no weird scaling on the popup itself is affecting the button disproportionately */
+.leaflet-popup {
+    /* If there was a transform-origin or specific animation here affecting children oddly */
+    /* transform-origin: 50% 50%; /* Or whatever is appropriate */
+}
+
+/* If the "zoom" animation is still affecting the close button,
+   you might need to be more aggressive or target the zoom animation class directly,
+   but often resetting transition/animation on the button itself is enough. */
+.leaflet-zoom-animated .leaflet-popup-close-button {
+    /* transition: none !important; /* Already set above, but can be repeated for specificity */
+}

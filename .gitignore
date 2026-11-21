@@ -1,0 +1,28 @@
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+.next/
+out/
+coverage/
+coverage-summary.html
+*.tsbuildinfo
+*.log
+
+# Local configuration; only placeholder templates belong in Git
+.env
+.env.*
+!.env.example
+/compose.yaml
+/compose.yml
+*.pem
+*.key
+
+# OS and editor metadata
+.DS_Store
+._*
+.idea/
+.vscode/
+
+# Local verification notes and logs
+.prepublish/
