@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 
 const TravelSidebar: React.FC = () => {
@@ -44,7 +45,7 @@ const TravelSidebar: React.FC = () => {
           <h4 style={styles.albumTitle}>My Album</h4>
           <div style={styles.imageContainer}>
             {uploadedImages.map((img) => (
-              <img
+              <Image unoptimized width={70} height={70}
                 key={img.id}
                 src={img.id}
                 alt="uploaded"

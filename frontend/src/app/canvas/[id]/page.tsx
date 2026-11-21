@@ -19,11 +19,11 @@ export default function CanvasPage({ params }: { params: Promise<{ id: string }>
 
   // Ensure we get the latest map list when the page loads
   useEffect(() => {
-    if (user && (!maps || maps.length === 0)) {
+    if (user && maps.length === 0) {
       console.log('Fetching maps in canvas page');
       fetchMaps();
     }
-  }, [user, maps?.length]);
+  }, [user, maps.length, fetchMaps]);
 
   // Validate map ID and handle default map logic
   useEffect(() => {

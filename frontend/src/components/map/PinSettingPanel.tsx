@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMap } from '@/contexts/map/MapContext';
 import { useMapAcl } from '@/contexts/map/MapAclContext'; // Correct: No MapPermission enum imported
@@ -33,7 +33,8 @@ function debounce<F extends (...args: any[]) => any>(func: F, waitFor: number) {
     }
     timeout = setTimeout(() => func(...args), waitFor);
   };
-  return debounced as (...args: Parameters<F>) => ReturnType<F>;
+  debounced.cancel = () => { if (timeout !== null) clearTimeout(timeout); };
+  return debounced;
 }
 
 interface PinSettingPanelProps {
@@ -176,8 +177,8 @@ export default function PinSettingPanel({ isActive, onToggle }: PinSettingPanelP
     };
   }, []);
 
-  const debouncedFetchSuggestions = useCallback(
-    debounce(async (input: string) => {
+  const debouncedFetchSuggestions = useMemo(
+    () => debounce(async (input: string) => {
       if (!input.trim() || input.length < 2) {
         setSuggestions([]);
         setShowSuggestions(false);
@@ -203,9 +204,10 @@ export default function PinSettingPanel({ isActive, onToggle }: PinSettingPanelP
         setIsSearching(false);
       }
     }, 500),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [] // Empty dependency array is intentional for debounce
   );
+
+  useEffect(() => () => debouncedFetchSuggestions.cancel(), [debouncedFetchSuggestions]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

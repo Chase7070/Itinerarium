@@ -13,6 +13,6 @@ npm run dev -- --port 7392
 
 Open http://localhost:7392. Location search requires your own OpenRouteService key. Client environment variables are browser-visible.
 
-Check types with `npx tsc --noEmit`, lint with `npx eslint .`, and build with `npm run build`. The inherited build configuration skips type/lint errors. No frontend test script is configured.
+Check types with `npx tsc --noEmit`, lint with `npm run lint`, and build with `npm run build`. Build-time type and lint checks are enabled; the lint script requires zero warnings. No frontend test script is configured.
 
 See [project provenance](../PROVENANCE.md).

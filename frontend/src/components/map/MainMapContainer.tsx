@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import React, { useState } from 'react';
 import PhotoSettingsPanel from '@/components/map/PhotoSettingsPanel';
 import CanvasSettingPanel from '@/components/map/CanvasSettingPanel';
 import PinSettingPanel from '@/components/map/PinSettingPanel';
@@ -51,7 +52,7 @@ const MainMapContainer: React.FC<MainMapContainerProps> = ({ map, user }) => {
                                         <div className="mb-6">
                                             <div className="flex items-center space-x-4 mb-4">
                                                 {user?.avatar ? (
-                                                    <img
+                                                    <Image unoptimized width={48} height={48}
                                                         src={`${process.env.NEXT_PUBLIC_API_URL}${user.avatar}`}
                                                         alt="User avatar"
                                                         className="w-12 h-12 rounded-full border-2 border-indigo-100 dark:border-indigo-900"

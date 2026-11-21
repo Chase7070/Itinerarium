@@ -74,10 +74,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } else {
         return true;
       }
-    } catch (error) {
+    } catch {
       return true;
     }
   }, [token]);
+
+  // Method to fetch user data
+  const fetchUserData = useCallback(async () => {
+    if (!token) return;
+
+    setIsLoading(true);
+    try {
+      const userInfo = await userApi.getCurrentUser();
+
+      setUserState(userInfo);
+      Cookies.set(USER_COOKIE_NAME, JSON.stringify(userInfo), {
+        expires: COOKIE_EXPIRES,
+        path: '/',
+        sameSite: 'strict'
+      });
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      if ((error as Error).message === 'Failed to fetch user data') {
+        logout();
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }, [token, logout]);
 
   // Restore token and user from cookies
   useEffect(() => {
@@ -92,7 +116,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           if (storedUser) {
             try {
               setUserState(JSON.parse(storedUser));
-            } catch (e) {
+            } catch {
               console.error('Failed to parse user data from cookie');
               await fetchUserData();
             }
@@ -119,31 +143,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, TOKEN_CHECK_INTERVAL);
 
     return () => clearInterval(tokenCheckInterval);
-  }, [token, validateToken]);
-
-  // Method to fetch user data
-  const fetchUserData = async () => {
-    if (!token) return;
-
-    setIsLoading(true);
-    try {
-      const userInfo = await userApi.getCurrentUser();
-
-      setUserState(userInfo);
-      Cookies.set(USER_COOKIE_NAME, JSON.stringify(userInfo), {
-        expires: COOKIE_EXPIRES,
-        path: '/',
-        sameSite: 'strict'
-      });
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      if ((error as Error).message === 'Failed to fetch user data') {
-        logout();
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  }, [token, validateToken, fetchUserData]);
 
   const setToken = useCallback((newToken: string | null) => {
     if (newToken) {
@@ -156,7 +156,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (typeof window !== 'undefined') {
         try {
           localStorage.setItem('token', newToken);
-        } catch (e) {
+        } catch {
           console.warn('Failed to store token in localStorage');
         }
       }
@@ -167,7 +167,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } else {
       logout();
     }
-  }, [logout]);
+  }, [logout, fetchUserData]);
 
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production') {
@@ -178,7 +178,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       });
 
       if (typeof window !== 'undefined') {
-        (window as any).__AUTH_DEBUG__ = {
+        (window as Window & { __AUTH_DEBUG__?: { getToken: () => string | null; getUser: () => User | null; getCookieToken: () => string | undefined; getCookieUser: () => string | undefined; validateToken: () => Promise<boolean> } }).__AUTH_DEBUG__ = {
           getToken: () => token,
           getUser: () => user,
           getCookieToken: () => Cookies.get(TOKEN_COOKIE_NAME),

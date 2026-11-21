@@ -1,5 +1,6 @@
 'use client'
 
+import { getErrorMessage } from '@/utils/errorMessage';
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/auth/AuthContext'
@@ -36,9 +37,9 @@ export default function RegisterPage() {
 
       setToken(result.token)
       router.push('/')
-    } catch (err: any) {
+    } catch (err) {
       console.error('Registration error:', err)
-      setError(err.response?.data?.message || err.message || 'Registration request failed')
+      setError(getErrorMessage(err, 'Registration request failed'))
     } finally {
       setIsLoading(false)
     }

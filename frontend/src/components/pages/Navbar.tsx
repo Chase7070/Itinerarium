@@ -1,6 +1,7 @@
 // src/app/components/Navbar.tsx
 'use client';
 
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/auth/AuthContext';
@@ -72,7 +73,7 @@ const Navbar: React.FC = () => {
                     transition={{ delay: 0.3 }}
                   >
                     {user?.avatar ? (
-                      <img
+                      <Image unoptimized width={32} height={32}
                         src={getUserAvatarUrl(user.avatar)}
                         alt="Avatar"
                         className="w-8 h-8 rounded-full border-2 border-yellow-400 object-cover"
@@ -168,7 +169,7 @@ const Navbar: React.FC = () => {
                   <div className="flex items-center justify-between px-4 py-2 border-t border-blue-800">
                     <div className="flex items-center">
                       {user?.avatar ? (
-                        <img
+                        <Image unoptimized width={32} height={32}
                           src={getUserAvatarUrl(user.avatar)}
                           alt="Avatar"
                           className="w-8 h-8 rounded-full border-2 border-yellow-400"

@@ -30,7 +30,7 @@ export const fetchLocationSuggestions = async (input: string): Promise<LocationS
 
         const data = await response.json();
 
-        return data.features.map((feature: any) => ({
+        return data.features.map((feature: { properties: { name: string; country?: string }; geometry: { coordinates: [number, number] } }) => ({
             name: feature.properties.name,
             country: feature.properties.country || 'Unknown',
             coords: [

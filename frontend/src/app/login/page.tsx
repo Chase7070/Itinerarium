@@ -1,5 +1,6 @@
 'use client'
 
+import { getErrorMessage } from '@/utils/errorMessage';
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/auth/AuthContext'
@@ -33,9 +34,9 @@ export default function LoginPage() {
 
       setToken(result.token)
       router.push('/')
-    } catch (err: any) {
+    } catch (err) {
       console.error('Login error:', err)
-      setError(err.response?.data?.message || err.message || 'Login request failed')
+      setError(getErrorMessage(err, 'Login request failed'))
     } finally {
       setIsLoading(false)
     }

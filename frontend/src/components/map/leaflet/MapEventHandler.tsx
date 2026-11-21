@@ -19,7 +19,7 @@ const MapEventHandler: React.FC<MapEventHandlerProps> = ({ pinMode, newPinName, 
                 try {
                     const { country } = await reverseGeocode(e.latlng.lat, e.latlng.lng);
                     await addPin({ geo_location: e.latlng, city: newPinName, country });
-                } catch (error) {
+                } catch {
                     await addPin({ geo_location: e.latlng, city: newPinName, country: "Unknown" });
                 }
             }

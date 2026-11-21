@@ -39,7 +39,7 @@ export default function Page({ params }: { params: Promise<{ code: string }> }) 
         };
 
         fetchMap();
-    }, [code, user, router]);
+    }, [code, user, router, setPermission, setShare]);
 
     if (!user) {
         return <div>Redirecting to login...</div>; // if user not logged in, show redirecting to login

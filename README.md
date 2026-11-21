@@ -13,6 +13,30 @@ This repository is a personal continuation of the University of Auckland CS732 T
 
 These describe the inherited application, not a claim that all features were independently authored or verified in this continuation.
 
+## Screenshots
+
+Original course-project screenshots extracted from Guang Liu's individual report (Figures 3-6 and 10). They show the application at the time of the report; they are not screenshots of the latest local verification run.
+
+### Interactive map and location pins
+
+![Interactive travel map with location search and pin management](docs/screenshots/map-pins.png)
+
+### Photo albums
+
+![Map location popup with travel photos and the album management panel](docs/screenshots/photo-albums.png)
+
+### Dashboard
+
+![Dashboard with the user's travel maps and profile overview](docs/screenshots/dashboard.png)
+
+### Account registration
+
+<img src="docs/screenshots/registration.png" alt="Account registration form with avatar upload" width="520">
+
+### Sharing settings
+
+<img src="docs/screenshots/sharing-settings.png" alt="Map visibility settings and collaborator invitation roles" width="300">
+
 ## Local development
 
 Use Node.js 22 LTS and npm. Both applications include lockfiles; install with `npm ci`. A local MongoDB instance is required to run the backend. The ports below avoid the common frontend port 3000.
@@ -58,11 +82,11 @@ From `frontend/`:
 
 ```bash
 npx tsc --noEmit
-npx eslint .
+npm run lint
 npm run build
 ```
 
-The inherited Next.js configuration skips type and lint errors during builds, so a successful build alone is insufficient. The inherited `npm run lint` script uses `next lint`; use `npx eslint .` for this Next.js version. There is no frontend test script. Some backend tests download a temporary MongoDB binary through `mongodb-memory-server`.
+Type and lint checks are enabled during Next.js builds. `npm run lint` runs ESLint with zero warnings allowed, excluding generated output. There is no frontend test script. Some backend tests download a temporary MongoDB binary through `mongodb-memory-server`.
 
 ## Containers
 

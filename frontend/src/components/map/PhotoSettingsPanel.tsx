@@ -163,7 +163,7 @@ export default function PhotoSettingsPanel({ isActive, onToggle }: PhotoSettings
     );
     setNewAlbumName('');
     setShowCreateAlbumDialog(false);
-  }, [newAlbumName, createAlbum, handleAsync, setSelectedAlbumId, selectedPointId]); // Added selectedPointId in case linking logic is added
+  }, [newAlbumName, createAlbum, handleAsync, setSelectedAlbumId]);
 
   // Delete album handlers
   const handleDeleteAlbumRequest = useCallback((albumIdToDelete: string, e: React.MouseEvent) => {

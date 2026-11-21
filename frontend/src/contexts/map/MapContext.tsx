@@ -1,5 +1,5 @@
 // src/context/MapContext.tsx
-import React, { createContext, useState, useContext, ReactNode, useCallback, useRef, useEffect } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useRef, useEffect } from 'react';
 import L from 'leaflet';
 import { MapMapAclContext } from './MapAclContext'; // 引入 ACLProvider
 

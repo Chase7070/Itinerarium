@@ -11,7 +11,7 @@ interface MapAclContextType {
 const MapAclContext = createContext<MapAclContextType | undefined>(undefined);
 
 export const MapMapAclContext = ({ children }: { children: ReactNode }) => {
-  const [share, setShare] = useState<any | null>(null);
+  const [share, setShare] = useState<Share | null>(null);
   const [permission, setPermission] = useState<'read' | 'write'>('read');
 
   return (

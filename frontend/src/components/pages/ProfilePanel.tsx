@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image';
+import { getErrorMessage } from '@/utils/errorMessage';
 import { useAuth } from '@/contexts/auth/AuthContext'
 import { useUserMaps } from '@/contexts/map/UserMapsContext' // Ensure MapData type expects _id and createdAt
 import { useState, useEffect } from 'react'
@@ -62,12 +64,10 @@ export default function ProfilePanel() {
       )
       // UI should update automatically as `maps` from context changes,
       // triggering the useEffect to update `localMaps`.
-    } catch (error: any) {
+    } catch (error) {
       console.error("ProfilePanel: Failed to delete map.", error)
       const message =
-        error?.response?.data?.message ||
-        error?.message ||
-        "Failed to delete map."
+        getErrorMessage(error, "Failed to delete map.")
       setDeleteError(message)
       setTimeout(() => setDeleteError(null), 3000)
     }
@@ -109,15 +109,13 @@ export default function ProfilePanel() {
           "Map created, but there was an issue with its data. Navigation aborted."
         )
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error(
         "ProfilePanel: An error occurred during map creation via contextCreateMap:",
         error
       )
       const errorMessage =
-        error?.response?.data?.message ||
-        error?.message ||
-        "An unexpected error occurred while creating the map."
+        getErrorMessage(error, "An unexpected error occurred while creating the map.")
       setDeleteError(errorMessage) // Or a specific creationError state
     } finally {
       setIsCreating(false)
@@ -134,7 +132,7 @@ export default function ProfilePanel() {
       <div className="flex items-center space-x-4 mb-6 pb-6 border-b border-gray-200">
         <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center overflow-hidden">
           {user.avatar ? (
-            <img
+            <Image unoptimized width={64} height={64}
               src={getUserAvatarUrl(user.avatar)}
               alt={user.username || 'User Avatar'}
               className="w-full h-full object-cover"
@@ -238,7 +236,7 @@ export default function ProfilePanel() {
           ))}
           {sortedMaps.length === 0 && !isCreating && (
             <p className="text-sm text-gray-500 col-span-full text-center py-4">
-              You haven't created any maps yet.
+              You haven&apos;t created any maps yet.
             </p>
           )}
         </div>

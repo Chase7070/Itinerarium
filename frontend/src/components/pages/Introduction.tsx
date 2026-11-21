@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from "react";
 import Link from "next/link";
 
@@ -16,7 +17,7 @@ const Introduction = () => {
                 {/* feature block 1: your exclusive website */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-24">
                 <div className="md:col-span-7 rounded-2xl overflow-hidden shadow-xl transform transition-all hover:scale-[1.02] duration-500 group">
-                    <img
+                    <Image unoptimized width={1000} height={1000}
                         src="/assets/home/mapDisplay1.jpeg"
                         alt="Your Personal Website"
                         className="w-full h-full object-cover"
@@ -66,7 +67,7 @@ const Introduction = () => {
                     </ul>
                 </div>
                 <div className="md:col-span-7 md:order-2 order-1 rounded-2xl overflow-hidden shadow-xl transform transition-all hover:scale-[1.02] duration-500 group">
-                    <img
+                    <Image unoptimized width={1000} height={1000}
                         src="/assets/home/mapDisplay2.webp"
                         alt="Homepage Map"
                         className="w-full h-full object-cover"
@@ -77,7 +78,7 @@ const Introduction = () => {
             {/* feature block 3: collaborative map editing */}
             <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
                 <div className="md:col-span-7 rounded-2xl overflow-hidden shadow-xl transform transition-all hover:scale-[1.02] duration-500 group">
-                    <img
+                    <Image unoptimized width={1000} height={1000}
                         src="/assets/home/mapDisplay3.webp"
                         alt="Collaborative Map Editing"
                         className="w-full h-full object-cover"
@@ -96,7 +97,7 @@ const Introduction = () => {
                         Collaborate with friends and family to edit and share your maps, creating a shared travel experience.
                     </p>
                     <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-                        Build wonderful memories together by marking places you've visited as a team.
+                        Build wonderful memories together by marking places you&apos;ve visited as a team.
                     </p>
                     <Link href="/register" className="inline-flex items-center text-white bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 font-medium rounded-lg px-5 py-2.5 text-center">
                         Get Started Now

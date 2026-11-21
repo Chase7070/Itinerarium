@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image';
 import { useAuth } from '@/contexts/auth/AuthContext'
 
 export default function UserCard() {
@@ -18,11 +19,11 @@ export default function UserCard() {
       margin: '20px auto'
     }}>
       {/* avatar preview */}
-      <img
+      <Image unoptimized height={80}
         src={`http://localhost:3001${user.avatar}`}
         alt="Avatar"
         width={80}
-        style={{ borderRadius: '50%' }}
+        style={{ borderRadius: '50%', height: 'auto' }}
       />
 
       <div>

@@ -1,17 +1,12 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useAuth } from '@/contexts/auth/AuthContext'
 import { useUserMaps } from '@/contexts/map/UserMapsContext'
 import { useRouter } from 'next/navigation'
 import ProfilePanel from '@/components/pages/ProfilePanel'
 import ProtectedRoute from '@/components/auth/ProtectedRoute'
 import Link from 'next/link'
-import { mapApi } from '@/api'
-import MapDebugger from '@/components/elements/MapDebugger';
 
 export default function ProfilePage() {
-  const { user } = useAuth()
   const { maps, isLoading, error } = useUserMaps()
   const router = useRouter()
 
@@ -95,7 +90,7 @@ export default function ProfilePage() {
                             className="text-sm text-blue-600 hover:text-blue-800"
                             onClick={(e) => {
                               e.stopPropagation();
-                              map.id && handleOpenMap(map.id);
+                              if (map.id) handleOpenMap(map.id);
                             }}
                           >
                             Open →

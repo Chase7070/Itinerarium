@@ -3,7 +3,6 @@
 
 import React from 'react';
 import { useNotification, Notification } from '@/contexts/notification/NotificationContext';
-import { v4 as uuidv4 } from 'uuid';
 
 export default function NotificationList() {
   const { notifications, clearNotification } = useNotification();
@@ -80,14 +79,4 @@ function NotificationItem({ notification, onClear }: NotificationItemProps) {
       </div>
     </div>
   );
-}
-
-function addNotification(message: string, type: 'success' | 'error' | 'warning' | 'info') {
-  const newNotification = {
-    id: uuidv4(),
-    message,
-    type,
-    timestamp: Date.now()
-  };
-  // add to notification list...
 }

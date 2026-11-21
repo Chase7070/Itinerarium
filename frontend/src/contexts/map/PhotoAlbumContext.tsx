@@ -54,7 +54,7 @@ export const PhotoAlbumProvider = ({ children, mapId }: { children: ReactNode, m
 
   const getAlbumById = useCallback((albumId: string) => {
     return albums.find(a => a.id === albumId);
-  }, [albums, mapId, pinId]);
+  }, [albums]);
 
   const createAlbum = useCallback(
     async (name: string): Promise<JourneyAlbum> => {
@@ -62,7 +62,7 @@ export const PhotoAlbumProvider = ({ children, mapId }: { children: ReactNode, m
       setAlbums((albums) => [...albums, newAlbum.journeyAlbum]);
       return newAlbum.journeyAlbum;
     },
-    [albums, mapId, pinId]
+    [mapId, pinId]
   );
 
   // Update album name

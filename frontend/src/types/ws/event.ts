@@ -13,7 +13,7 @@ export interface RoomUserInfo {
     email: string; // User email
 }
 
-export interface WebSocketMessage<T = any> {
+export interface WebSocketMessage<T = unknown> {
     payload: T; // Message payload (generic type)
     user?: RoomUserInfo; // Optional: User information with id and email only
     timestamp?: string; // Optional: Timestamp of the message

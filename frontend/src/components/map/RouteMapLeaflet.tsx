@@ -53,7 +53,7 @@ const RouteMapLeaflet = () => {
         try {
           const albumData = await getAlbumById(selectedAlbumId);
           setSelectedAlbum(albumData || null);
-        } catch (error) {
+        } catch {
           setSelectedAlbum(null);
         }
       } else {

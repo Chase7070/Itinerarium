@@ -1,8 +1,9 @@
+import type { Socket } from "socket.io-client";
 import { useEffect } from "react";
 import { MessageType, WebSocketEvent, EventType, UserPosition, RoomUser } from "@/types/ws/event";
 
 interface UseWebSocketListenersProps {
-    socket: any;
+    socket: Socket;
     setConnMousePositions: React.Dispatch<React.SetStateAction<UserPosition[]>>;
     setRoomUsers: React.Dispatch<React.SetStateAction<RoomUser[]>>;
     syncPins: () => Promise<void>;
@@ -18,7 +19,7 @@ export const useWebSocketListeners = ({
 }: UseWebSocketListenersProps) => {
     useEffect(() => {
         // Handle general events
-        const handleEvent = async (data: WebSocketEvent<any>) => {
+        const handleEvent = async (data: WebSocketEvent<unknown>) => {
             switch (data.type) {
                 case EventType.PIN_CREATED:
                 case EventType.PIN_UPDATED:

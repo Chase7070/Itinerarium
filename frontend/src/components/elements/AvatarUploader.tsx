@@ -1,7 +1,9 @@
 'use client'
 
+import Image from 'next/image';
+import { getErrorMessage } from '@/utils/errorMessage';
 import { useState } from 'react'
-import { uploadApi, BASE_URL } from '@/api'
+import { uploadApi } from '@/api'
 import { buildImageUrl } from '@/utils/imageUtils'
 
 interface AvatarUploaderProps {
@@ -30,9 +32,9 @@ export default function AvatarUploader({ onUpload }: AvatarUploaderProps) {
       
       // Set preview URL
       setPreview(buildImageUrl(result.file.path));
-    } catch (err: any) {
+    } catch (err) {
       console.error('Avatar upload error:', err);
-      setError(err.response?.data?.message || err.message || 'Upload error');
+      setError(getErrorMessage(err, 'Upload error'));
     } finally {
       setUploading(false)
     }
@@ -47,7 +49,7 @@ export default function AvatarUploader({ onUpload }: AvatarUploaderProps) {
       {preview && (
         <div style={{ marginTop: 10 }}>
           <p>Preview:</p>
-          <img src={preview} alt="avatar" width={100} />
+          <Image unoptimized height={100} src={preview} alt="avatar" width={100} style={{ height: 'auto' }} />
         </div>
       )}
     </div>

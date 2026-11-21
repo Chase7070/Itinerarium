@@ -3,7 +3,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ShareMapPanel from './ShareMapPanel';
-import { Map as MapType, Share } from '@/types/common/index';
+import { Map as MapType } from '@/types/common/index';
 import { useMapAcl } from '@/contexts/map/MapAclContext';
 
 import {

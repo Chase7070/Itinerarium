@@ -1,5 +1,5 @@
 import apiClient from './axiosConfig';
-import { CreateJourneyAlbumRequest, CreateJourneyAlbumResponse, GetJourneyAlbumResponse, GetJourneyAlbumsResponse, UpdateJourneyAlbumRequest, UpdateJourneyAlbumResponse } from '@/types/api/index';
+import { CreateJourneyAlbumRequest, CreateJourneyAlbumResponse, GetJourneyAlbumResponse, GetJourneyAlbumsResponse, UpdateJourneyAlbumRequest } from '@/types/api/index';
 
 export interface JourneyAlbumData {
   name: string;

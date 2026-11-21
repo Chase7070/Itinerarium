@@ -1,7 +1,8 @@
 // src/components/PhotoGallery.tsx
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react'
 import { useNotification } from '@/contexts/notification/NotificationContext';
 import { useMapAcl } from '@/contexts/map/MapAclContext';
 import { usePhotoMethods } from '@/hooks/api/usePhotoMethods';
@@ -32,7 +33,6 @@ export default function PhotoGallery({ album: currentAlbum, onPhotosChanged }: P
     uploading,
     isDeleting, // Combined loading state for all delete operations
     // isLoading, // This was from usePhotoMethods, isDeleting might cover it or use a combined one
-    setUploading
   } = usePhotoMethods();
 
   // Combined loading state for UI disabling
@@ -272,7 +272,7 @@ export default function PhotoGallery({ album: currentAlbum, onPhotosChanged }: P
                     }
                   }}
                 >
-                  <img
+                  <Image unoptimized width={1000} height={1000}
                     src={getPhotoUrl(photo.key)}
                     alt={`Photo in ${currentAlbum.name}`}
                     className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
@@ -322,9 +322,9 @@ export default function PhotoGallery({ album: currentAlbum, onPhotosChanged }: P
           onClick={() => setSelectedPhoto(null)}
         >
           <div className="relative max-w-[90vw] max-h-[90vh] flex flex-col items-center" onClick={e => e.stopPropagation()}>
-            <img
+            <Image unoptimized width={1000} height={1000}
               src={getPhotoUrl(selectedPhoto.key)}
-              className="block max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain"
+              style={{ width: 'auto', height: 'auto' }} className="block max-w-full max-h-[85vh] rounded-lg shadow-2xl object-contain"
               alt={`Viewing photo from ${currentAlbum.name}`}
             />
             <button

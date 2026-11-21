@@ -1,5 +1,6 @@
 'use client';
 
+import { getErrorMessage } from '@/utils/errorMessage';
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Map as MapType, Share, RelevantId } from '@/types/common/index';
@@ -120,9 +121,9 @@ export default function ShareMapPanel({ map, share }: ShareMapPanelProps) {
       setInviteEmail('');
       showNotification(`${data.user.username || data.user.email} invited. Save to apply changes.`, 'success');
 
-    } catch (error: any) {
+    } catch (error) {
       console.error(`Failed to fetch user for email: ${inviteEmail}`, error);
-      const message = error.response?.data?.message || error.message || `Failed to invite user "${inviteEmail}".`;
+      const message = getErrorMessage(error, `Failed to invite user "${inviteEmail}".`);
       showNotification(message, 'error');
     }
   }, [inviteEmail, inviteRole, relevantUsers, map, showNotification]); // Removed userApi from deps as it should be stable
@@ -137,9 +138,9 @@ export default function ShareMapPanel({ map, share }: ShareMapPanelProps) {
         })),
       });
       showNotification('Sharing settings saved successfully!', 'success');
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error saving sharing settings:', error);
-      const message = error.response?.data?.message || error.message || 'Failed to save settings.';
+      const message = getErrorMessage(error, 'Failed to save settings.');
       showNotification(message, 'error');
     }
   }, [map.id, accessScope, relevantUsers, showNotification]); // Removed shareApi from deps
@@ -358,7 +359,7 @@ export default function ShareMapPanel({ map, share }: ShareMapPanelProps) {
       </motion.div>
 
       <motion.p variants={itemFadeSlideDownVariants} className="text-xs text-slate-500 pt-2 text-center">
-        Changes are applied when you click "Save Sharing Settings".
+        Changes are applied when you click &quot;Save Sharing Settings&quot;.
       </motion.p>
     </motion.div>
   );

@@ -4,8 +4,8 @@
 import { useState, useCallback } from 'react';
 import { useNotification } from '@/contexts/notification/NotificationContext';
 
-export interface AsyncHandlerOptions {
-  onSuccess?: (data: any) => void;
+export interface AsyncHandlerOptions<T = unknown> {
+  onSuccess?: (data: T) => void;
   onError?: (error: Error) => void;
   successMessage?: string;
   errorMessage?: string;
@@ -17,7 +17,7 @@ export function useAsyncHandler() {
 
   const handleAsync = useCallback(async <T,>(
     asyncFn: () => Promise<T>,
-    options?: AsyncHandlerOptions
+    options?: AsyncHandlerOptions<T>
   ): Promise<T | null> => {
     setIsLoading(true);
     try {

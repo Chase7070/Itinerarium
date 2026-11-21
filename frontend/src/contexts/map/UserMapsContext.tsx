@@ -96,7 +96,7 @@ export function UserMapsProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
       fetchingRef.current = false;
     }
-  }, [user, createDefaultMap]);
+  }, [maps.length, createDefaultMap]);
 
   useEffect(() => {
     if (user && !authLoading && !hasFetchedRef.current) {
@@ -162,13 +162,15 @@ export function UserMapsProvider({ children }: { children: ReactNode }) {
     [maps]
   );
 
+  const refreshMaps = useCallback(() => fetchMaps(true), [fetchMaps]);
+
   return (
     <UserMapsContext.Provider
       value={{
         maps,
         isLoading,
         error,
-        fetchMaps: () => fetchMaps(true),
+        fetchMaps: refreshMaps,
         createMap,
         updateMap,
         deleteMap,
